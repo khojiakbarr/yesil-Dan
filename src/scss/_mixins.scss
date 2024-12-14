@@ -1,0 +1,184 @@
+/** @format */
+
+@mixin mobile() {
+  @media screen and (max-width: 767px) {
+    @content;
+  }
+}
+
+@mixin tablet() {
+  @media screen and (min-width: 768px) and (max-width: 1023px) {
+    @content;
+  }
+}
+
+@mixin media($min: 0, $max: 1023px) {
+  @media screen and (min-width: $min) and (max-width: $max) {
+    @content;
+  }
+}
+
+@mixin formInput() {
+  label {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+
+    color: $darkGreen;
+    font-size: 24px;
+    font-weight: 400;
+    border-top: 1px solid $darkGreen;
+    padding-top: 20px;
+
+    // Responsive media min-width 0px and max-width 1440px
+    @include media(0px, 1440px) {
+      font-size: 20px;
+    }
+
+    @include tablet() {
+      font-size: 16px;
+      padding-top: 10px;
+    }
+
+    @include mobile() {
+      font-size: 14px;
+      padding-top: 5px;
+    }
+  }
+
+  label:last-of-type {
+    border-bottom: 1px solid $darkGreen;
+  }
+
+  input,
+  select,
+  textarea {
+    padding: 0 0 40px;
+    border: none;
+
+    color: $darkGreen;
+    font-family: 'Apoc Normal';
+    font-size: 24px;
+    font-style: italic;
+    font-weight: 400;
+
+    &:focus {
+      outline: none;
+    }
+
+    // Responsive media min-width 0px and max-width 1440px
+    @include media(0px, 1440px) {
+      padding: 0 0 20px;
+      font-size: 20px;
+    }
+
+    @include tablet() {
+      padding: 0 0 15px;
+      font-size: 18px;
+    }
+
+    @include mobile() {
+      font-size: 14px;
+    }
+
+    &::placeholder {
+      opacity: 0.5;
+    }
+  }
+
+  @content;
+}
+
+// ! Primary Button mixin
+@mixin primaryBtn() {
+  position: relative;
+  background: $white;
+  border-radius: 500px;
+  border: 1px solid $darkGreen;
+  padding: 20px 40px 20px 89px;
+
+  margin-top: 60px;
+  float: right;
+  cursor: pointer;
+  transition: all 0.4s ease;
+
+  @include media(0px, 1440px) {
+    scale: 0.8;
+    transform: translateX(35px);
+  }
+
+  @include media(0px, 1024px) {
+    scale: 0.5;
+    transform: translateX(140px);
+    margin-top: 30px;
+  }
+
+  @include mobile() {
+    scale: 0.5;
+    transform: translateX(90px);
+    margin-top: 15px;
+  }
+
+  & span {
+    // Text style
+    color: $darkGreen;
+    text-align: center;
+    font-size: 24px;
+    font-weight: 700;
+    text-transform: uppercase;
+  }
+
+
+  &::after {
+    content: '';
+    width: 69px;
+    height: 100%;
+    border-radius: 500px;
+    background-color: $darkGreen;
+    background-image: url('/images/icon_arrow-right.svg');
+    background-repeat: no-repeat;
+    background-size: 0.8rem;
+    background-position: center center;
+    transition: all 0.4s ease;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  &::before {
+    content: '';
+    width: 69px;
+    height: 100%;
+    border-radius: 500px;
+    background-color: $darkGreen;
+    transition: all 0.4s ease;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+
+  &:hover {
+    padding-left: 40px;
+    padding-right: 89px;
+    border-color: transparent;
+
+    & span {
+      color: $white;
+      position: relative;
+    }
+
+    &::after {
+      left: calc(100% - 69px);
+      border: 1px solid $white;
+    }
+
+    &::before {
+      right: 0;
+      width: 100%;
+    }
+  }
+
+  @content;
+}

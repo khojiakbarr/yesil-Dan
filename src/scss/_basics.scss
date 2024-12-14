@@ -1,0 +1,27 @@
+/** @format */
+
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  list-style: none;
+  text-decoration: none;
+  scroll-behavior: smooth;
+}
+
+.container {
+  max-width: 1200px;
+  padding: 0px 20px;
+  margin: 0 auto;
+  @include mobile() {
+    padding: 0px 10px;
+  }
+  @include tablet() {
+    padding: 0px 15px;
+  }
+}
+
+textarea:focus {
+  outline: none;
+  border: none;
+}
